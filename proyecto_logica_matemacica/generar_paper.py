@@ -884,8 +884,8 @@ tabla('Tabla E1. Componentes del proyecto.',
 cuerpo('Repositorio del proyecto: https://github.com/Renngio45-gif/'
        'Logistica_Internacional_Proyecto_1S_LM_GL', first=0)
 
-cuerpo('Ruta de la aplicación dentro del repositorio: proyecto_logica_matemacica/sitio_web/',
-       first=0)
+cuerpo('Sitio publicado: https://renngio45-gif.github.io/'
+       'Logistica_Internacional_Proyecto_1S_LM_GL/', first=0)
 
 
 salida = os.path.join(BASE, 'Paper_Pepa_de_Oro_PUCESE.docx')
