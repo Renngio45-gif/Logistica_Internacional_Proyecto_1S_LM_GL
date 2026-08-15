@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto Integrador - Habilidades Lógico-Matemáticas | PUCESE</title>
+  <!-- SEO Metadata -->
+  <meta name="description" content="Reporte interactivo y simulador de lógica para el Proyecto Integrador de la PUCESE. Exportación de cacao y optimización de logística.">
+  <meta name="author" content="Alan Cárdenas Morán, Geovanny Farías Estupiñán">
+  <link rel="stylesheet" href="style.css?v=6">
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- BRAND HEADER -->
+    <header class="brand-header">
+      <div class="tag-rail">
+        <span><b>Origen</b> Esmeraldas · Ecuador</span>
+        <span><b>Producto</b> Cacao fino de aroma</span>
+        <span><b>Puerto</b> Guayaquil · GYE</span>
+      </div>
+
+      <div class="brand-row">
+        <h1 class="brand-name">Pepa<span class="brand-de">de</span>Oro</h1>
+        <p class="brand-tagline">Planificador de exportación</p>
+      </div>
+
+      <p class="brand-pitch">
+        Dinos cuánto cacao tienes y a qué país va. Te decimos lo que cuesta enviarlo, cuánto demora y si conviene la ruta rápida.
+      </p>
+
+      <div class="uni-strip">
+        <span>PUCE Sede Esmeraldas — PUCETEC</span>
+        <span>Habilidades Lógico-Matemáticas</span>
+        <span>Primer Nivel · 2026-1</span>
+        <span>Docente: Msc. Adrián Vargas</span>
+        <span>Alan Cárdenas Morán • Geovanny Farías Estupiñán</span>
+      </div>
+    </header>
+
+    <!-- PHASE NAVIGATION -->
+    <nav class="phase-nav" id="phase-nav">
+      <button class="nav-btn is-active" data-panel="panel-calc">
+        <span class="nav-icon">🧮</span>
+        <span class="nav-label">Calculadora</span>
+        <span class="nav-sub">Usa la herramienta</span>
+      </button>
+      <button class="nav-btn" data-panel="panel-fase1">
+        <span class="nav-icon">🔀</span>
+        <span class="nav-label">Fase 1 · Lógica</span>
+        <span class="nav-sub">Regla de decisión</span>
+      </button>
+      <button class="nav-btn" data-panel="panel-fase2">
+        <span class="nav-icon">📐</span>
+        <span class="nav-label">Fase 2 · Modelo</span>
+        <span class="nav-sub">Ecuaciones y costos</span>
+      </button>
+      <button class="nav-btn" data-panel="panel-fase3">
+        <span class="nav-icon">📈</span>
+        <span class="nav-label">Fase 3 · Funciones</span>
+        <span class="nav-sub">Cuánto exportar</span>
+      </button>
+    </nav>
+
+    <main id="tab-container">
+
+    <!-- ============================ PANEL: CALCULADORA ============================ -->
+    <div class="tab-panel is-active" id="panel-calc">
+
+    <!-- CONCLUSION AT A GLANCE -->
+    <section id="conclusion-principal" class="conclusion-hero">
+      <span class="conclusion-tag">Conclusión del modelo</span>
+      <h2 class="conclusion-headline">Conviene exportar <strong>5 contenedores al mes</strong> (125 t de cacao)</h2>
+      <p class="conclusion-lead">
+        Esa es la respuesta que entrega el modelo completo. Todo lo que sigue en esta página es el procedimiento matemático que la sustenta.
+      </p>
+      <div class="conclusion-grid">
+        <div class="conclusion-item">
+          <div class="conclusion-num">$35,250</div>
+          <div class="conclusion-label">Utilidad neta mensual en el óptimo, según la función U(x)</div>
+        </div>
+        <div class="conclusion-item">
+          <div class="conclusion-num">$2,800 + $700</div>
+          <div class="conclusion-label">Transporte y seguro por envío, según el sistema de ecuaciones 2×2</div>
+        </div>
+        <div class="conclusion-item">
+          <div class="conclusion-num">D = p ∧ ¬q</div>
+          <div class="conclusion-label">La ruta rápida se aprueba solo si el envío es urgente y no excede el presupuesto</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SIMPLE EXPORT CALCULATOR ===== -->
+    <section id="calculadora" class="calc-section">
+      <h2>Calculadora de Exportación</h2>
+      <p class="intro-text">
+        Responde tres preguntas y la herramienta te dice cuánto cuesta, cuánto demora y si conviene enviar.
+      </p>
+
+      <div class="calc-layout">
+
+        <!-- ---- INPUTS ---- -->
+        <div class="calc-inputs">
+
+          <div class="calc-step">
+            <div class="step-head"><span class="step-num">1</span> ¿Desde qué provincia sales?</div>
+            <select id="calc-origen" class="calc-select full">
+              <option value="gys" selected>Guayas — Guayaquil</option>
+              <option value="man">Manabí — Portoviejo</option>
+              <option value="esm">Esmeraldas — Esmeraldas</option>
+              <option value="lrs">Los Ríos — Babahoyo</option>
+              <option value="sdt">Santo Domingo — Santo Domingo</option>
+              <option value="oro">El Oro — Machala</option>
+              <option value="suc">Sucumbíos — Lago Agrio</option>
+              <option value="orl">Orellana — El Coca</option>
+            </select>
+            <p class="step-hint" id="hint-origen"></p>
+          </div>
+
+          <div class="calc-step">
+            <div class="step-head"><span class="step-num">2</span> ¿Cuánto cacao vas a enviar?</div>
+            <div class="qty-row">
+              <div class="input-container">
+                <input type="number" id="calc-cantidad" value="25" min="0.1" step="1">
+              </div>
+              <select id="calc-unidad" class="calc-select">
+                <option value="qq">Quintales (100 lb = 45.36 kg)</option>
+                <option value="saco60">Sacos de 60 kg</option>
+                <option value="kg">Kilogramos</option>
+                <option value="t" selected>Toneladas métricas</option>
+                <option value="lb">Libras</option>
+                <option value="tonus">Toneladas cortas (US)</option>
+              </select>
+            </div>
+            <p class="step-hint" id="hint-peso">Equivale a 25,000 kg · 55,115.50 lb · 25 t</p>
+          </div>
+
+          <div class="calc-step">
+            <div class="step-head"><span class="step-num">3</span> ¿A qué país lo envías?</div>
+            <select id="calc-destino" class="calc-select full">
+              <option value="nl" selected>🇳🇱 Países Bajos — Rotterdam</option>
+              <option value="de">🇩🇪 Alemania — Hamburgo</option>
+              <option value="be">🇧🇪 Bélgica — Amberes</option>
+              <option value="es">🇪🇸 España — Barcelona</option>
+              <option value="us">🇺🇸 Estados Unidos — Nueva York</option>
+              <option value="mx">🇲🇽 México — Manzanillo</option>
+              <option value="my">🇲🇾 Malasia — Port Klang</option>
+              <option value="co">🇨🇴 Colombia — Buenaventura</option>
+              <option value="pe">🇵🇪 Perú — Callao</option>
+            </select>
+            <p class="step-hint" id="hint-distancia">Distancia desde el puerto de Guayaquil: 10,700 km</p>
+          </div>
+
+          <div class="calc-step">
+            <div class="step-head"><span class="step-num">4</span> ¿Cómo lo transportas?</div>
+            <div class="modo-grid" id="modo-grid">
+              <button class="modo-btn is-active" data-modo="mar">
+                <span class="modo-icon">🚢</span>
+                <span class="modo-name">Marítimo</span>
+                <span class="modo-desc">Barato y lento</span>
+              </button>
+              <button class="modo-btn" data-modo="aire">
+                <span class="modo-icon">✈️</span>
+                <span class="modo-name">Aéreo</span>
+                <span class="modo-desc">Rápido y caro</span>
+              </button>
+              <button class="modo-btn" data-modo="tierra">
+                <span class="modo-icon">🚛</span>
+                <span class="modo-name">Terrestre</span>
+                <span class="modo-desc">Solo países vecinos</span>
+              </button>
+            </div>
+            <p class="step-hint" id="hint-modo"></p>
+          </div>
+
+          <div class="calc-step optional-step">
+            <div class="step-head"><span class="step-num">+</span> ¿Aplica la ruta rápida? <span class="opt-badge">opcional</span></div>
+            <div class="control-group">
+              <div class="control-label">
+                <span class="control-title">El envío es urgente (p)</span>
+                <span class="control-sub">Contrato con penalización o riesgo de caducidad</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="calc-urgente">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="input-group">
+              <label for="calc-presupuesto">Presupuesto logístico disponible:</label>
+              <div class="input-container">
+                <input type="number" id="calc-presupuesto" value="6500" min="0" step="100">
+                <span class="input-unit">$</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ---- RESULTS ---- -->
+        <div class="calc-results">
+          <!-- ===== FIRMA: marca de embarque estarcida ===== -->
+          <figure class="cargo-mark">
+            <figcaption class="cm-caption">Marca de embarque</figcaption>
+
+            <div class="cm-route">
+              <span class="cm-port" id="cm-origen">GYE</span>
+              <span class="cm-arrow" aria-hidden="true"></span>
+              <span class="cm-port" id="cm-destino">RTM</span>
+            </div>
+            <p class="cm-route-full">
+              <span id="cm-origen-full">Puerto de Guayaquil, Ecuador</span> &nbsp;→&nbsp; <span id="cm-destino-full">Rotterdam, Países Bajos</span>
+            </p>
+
+            <div class="cm-grid">
+              <div class="cm-cell">
+                <span class="cm-lbl">Peso neto</span>
+                <span class="cm-val" id="cm-peso">—</span>
+              </div>
+              <div class="cm-cell">
+                <span class="cm-lbl">Bultos</span>
+                <span class="cm-val" id="res-contenedores">—</span>
+              </div>
+              <div class="cm-cell">
+                <span class="cm-lbl">Vía</span>
+                <span class="cm-val" id="cm-modo">—</span>
+              </div>
+              <div class="cm-cell">
+                <span class="cm-lbl">Tránsito</span>
+                <span class="cm-val" id="res-dias">—</span>
+              </div>
+            </div>
+
+            <div class="cm-total">
+              <span class="cm-lbl">Costo logístico total</span>
+              <span class="cm-amount" id="res-total">—</span>
+              <span class="cm-note" id="res-porcentaje"></span>
+            </div>
+          </figure>
+
+          <div class="breakdown">
+            <div class="breakdown-title">Desglose del costo</div>
+            <div class="bd-row">
+              <span id="bd-valor-lbl">Valor FOB de la carga <small id="bd-incoterm-det">—</small></span>
+              <strong id="res-fob">$0.00</strong>
+            </div>
+            <div class="bd-row" id="bd-interno-row">
+              <span>Acarreo interno <small id="bd-interno-det">—</small></span>
+              <strong id="res-interno">$0.00</strong>
+            </div>
+            <div class="bd-row">
+              <span>Transporte internacional <small id="bd-modo-nombre">marítimo</small></span>
+              <strong id="res-transporte">$0.00</strong>
+            </div>
+            <div class="bd-row">
+              <span>Seguro de la carga <small id="bd-seguro-det">—</small></span>
+              <strong id="res-seguro">$0.00</strong>
+            </div>
+            <div class="bd-row">
+              <span>Comisiones logísticas <small id="bd-comision-det">—</small></span>
+              <strong id="res-comisiones">$0.00</strong>
+            </div>
+            <div class="bd-row bd-total">
+              <span>Total</span>
+              <strong id="res-total-2">$0.00</strong>
+            </div>
+            <div class="bd-row bd-info">
+              <span>Arancel en destino <small id="bd-arancel-base">—</small></span>
+              <strong id="res-arancel">0%</strong>
+            </div>
+          </div>
+
+          <div class="decision-status-card rejected" id="calc-decision">
+            <span class="decision-icon" id="calc-dec-icon">🚫</span>
+            <span class="decision-title" id="calc-dec-title">Ruta estándar</span>
+            <div class="decision-formula" id="calc-dec-formula">D = F ∧ ¬F = F</div>
+            <p class="decision-message" id="calc-dec-msg"></p>
+          </div>
+
+          <p class="calc-disclaimer">
+            Estimación referencial construida con el modelo del proyecto. Las distancias marítimas son aproximadas vía Canal de Panamá, las aéreas son de ruta directa y las terrestres siguen la red vial estatal; las tarifas provienen de promedios de mercado. Los aranceles corresponden al cacao en grano (partida 1801) y se muestran aparte del total porque los paga el importador al llegar a destino. Para una cotización en firme hay que consultar a la naviera o al agente de carga.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACTO ===== -->
+    <section id="contacto">
+      <h2>Hablemos de tu envío</h2>
+      <p class="intro-text">
+        Lo de arriba es una estimación. Escríbenos con los datos de tu lote y te devolvemos precios en firme de la naviera.
+      </p>
+
+      <div class="contacto-layout">
+        <form class="contacto-form" id="form-contacto" novalidate>
+          <div class="input-group">
+            <label for="ct-nombre">Tu nombre</label>
+            <div class="input-container">
+              <input type="text" id="ct-nombre" placeholder="Nombre y apellido" autocomplete="name">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="ct-contacto">Teléfono o correo</label>
+            <div class="input-container">
+              <input type="text" id="ct-contacto" placeholder="09XXXXXXXX o tucorreo@ejemplo.com" autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="ct-mensaje">¿Qué necesitas?</label>
+            <textarea id="ct-mensaje" rows="4" placeholder="Cuéntanos sobre tu lote, las fechas que manejas o cualquier duda."></textarea>
+          </div>
+
+          <div class="ct-resumen">
+            <span class="cm-lbl">Se adjunta tu cotización</span>
+            <p id="ct-resumen-txt">—</p>
+          </div>
+
+          <button type="submit" class="btn-wasap">
+            <svg class="wa-glifo" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.2.3-.9.9-.9 2.1s.9 2.5 1 2.6a9.3 9.3 0 0 0 3.6 3.2c1.3.6 1.9.6 2.5.5.4 0 1.4-.5 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3Z"/>
+            </svg>
+            Abrir WhatsApp con estos datos
+          </button>
+          <p class="form-hint">
+            Se abre WhatsApp con el mensaje ya escrito para que lo revises antes de enviarlo. Esta página no guarda ni envía nada por su cuenta.
+          </p>
+        </form>
+
+        <aside class="contacto-datos">
+          <div class="cd-block">
+            <div class="cd-title">Equipo</div>
+            <ul class="cd-list">
+              <li><b>Alan Cárdenas Morán</b><span>Lógica y regla de decisión</span></li>
+              <li><b>Geovanny Farías Estupiñán</b><span>Modelo algebraico y herramienta</span></li>
+            </ul>
+          </div>
+
+          <div class="cd-block">
+            <div class="cd-title">Dónde estamos</div>
+            <ul class="cd-list">
+              <li><b>PUCE Sede Esmeraldas</b><span>PUCETEC · Esmeraldas, Ecuador</span></li>
+              <li><b>Puerto de salida</b><span>Guayaquil · GYE</span></li>
+            </ul>
+          </div>
+
+          <div class="cd-block">
+            <div class="cd-title">Escríbenos</div>
+            <ul class="cd-list">
+              <li><b>WhatsApp</b><span><a href="#" id="cd-wa">+593 99 999 9999</a></span></li>
+              <li><b>Correo</b><span><a href="mailto:cacao@ejemplo.ec" id="cd-mail">cacao@ejemplo.ec</a></span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    </div><!-- /panel-calc -->
+
+    <!-- ============================ PANEL: FASE 1 ============================ -->
+    <div class="tab-panel" id="panel-fase1">
+
+    <div class="phase-banner">
+      <span class="phase-tag">FASE 1</span>
+      <h2 class="phase-title">Definición del Sistema y Lógica de Decisión</h2>
+      <p class="phase-sub">Problema real, variables, proposiciones, tabla de verdad e inferencia válida</p>
+    </div>
+
+    <!-- SECTION 1: PROBLEM DESCRIPTION -->
+    <section id="descripcion">
+      <h2>Descripción del Sistema y Problema Real</h2>
+      <p class="intro-text">
+        El sistema modela y optimiza la toma de decisiones logísticas para la exportación de productos agrícolas locales (como el cacao fino de aroma) desde la provincia de Esmeraldas hacia mercados internacionales (como Europa o Estados Unidos).
+      </p>
+      <div class="problem-card">
+        <strong>Problema real:</strong> Las asociaciones de productores en Esmeraldas enfrentan pérdidas económicas debido a la falta de un criterio automatizado y claro para elegir rutas de transporte. Frecuentemente se toman decisiones apresuradas sobre envíos urgentes que terminan excediendo el presupuesto asignado, o se seleccionan rutas lentas para carga perecedera. Este sistema resuelve la problemática delimitando de manera matemática cuándo se aprueba una ruta de distribución directa y urgente, balanceando la prioridad del tiempo de entrega con la viabilidad financiera de la exportación.
+      </div>
+    </section>
+
+    <!-- SECTION 2: SYSTEM VARIABLES -->
+    <section id="variables">
+      <h2>Variables Principales del Sistema</h2>
+      <p class="intro-text">
+        El sistema evalúa el estado del envío mediante tres variables concretas adaptadas a la operación de exportación:
+      </p>
+      
+      <div class="variables-grid">
+        <!-- Variable p -->
+        <div class="variable-card">
+          <div class="variable-badge">p</div>
+          <div class="variable-title">Estado de Urgencia de la Carga</div>
+          <div class="variable-desc">
+            Determina si el producto corre riesgo de caducidad o si existe un contrato con penalización por retraso en el puerto de destino.
+          </div>
+        </div>
+        
+        <!-- Variable q -->
+        <div class="variable-card">
+          <div class="variable-badge">q</div>
+          <div class="variable-title">Límite Presupuestario</div>
+          <div class="variable-desc">
+            Monitorea si los costos calculados de flete, aduanas e imprevistos superan el techo financiero asignado para el lote de envío.
+          </div>
+        </div>
+        
+        <!-- Variable r -->
+        <div class="variable-card r-var">
+          <div class="variable-badge">r</div>
+          <div class="variable-title">Peso Total del Envío</div>
+          <div class="variable-desc">
+            Registra la masa neta de la carga contratada, la cual afecta directamente las tarifas aeroportuarias o marítimas y el consumo estimado de combustible.
+          </div>
+        </div>
+      </div>
+
+      <div class="problem-card">
+        <strong>Nota sobre el papel de cada variable:</strong> p y q son <strong>proposiciones lógicas</strong> (verdaderas o falsas) y por eso son las que aparecen como interruptores en el simulador y en la tabla de verdad. En cambio r es una <strong>variable numérica</strong>: no se enciende ni se apaga, sino que alimenta el resto del modelo. Concretamente, r = 25,000 kg determina el valor FOB del lote (25 t × $5,900/t = $147,500), la conversión kg → lb del apartado de magnitudes, y la capacidad de 25 t por contenedor que define la variable x de la función de utilidad.
+      </div>
+    </section>
+
+    <!-- SECTION 3: INTERACTIVE LOGIC SIMULATOR -->
+    <section id="simulador">
+      <h2>Regla de Decisión y Simulador Lógico</h2>
+      <p class="intro-text">
+        La ruta rápida y directa se aprueba (<strong>D</strong>) si y solo si el envío es urgente y el presupuesto <strong>no</strong> está excedido.
+      </p>
+      
+      <div class="simulator-layout">
+        
+        <!-- Control Panel -->
+        <div class="control-panel">
+          <div class="simulator-controls">
+            <h3 class="variable-title" style="margin-bottom: 0.5rem;">Controles del Simulador</h3>
+            
+            <!-- Switch p -->
+            <div class="control-group">
+              <div class="control-label">
+                <span class="control-title">Urgencia (p)</span>
+                <span class="control-sub">¿El envío es urgente?</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="switch-p">
+                <span class="slider"></span>
+              </label>
+            </div>
+            
+            <!-- Switch q -->
+            <div class="control-group">
+              <div class="control-label">
+                <span class="control-title">Excedido (q)</span>
+                <span class="control-sub">¿Supera el presupuesto?</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="switch-q">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+          
+          <!-- Decision Display Card -->
+          <div id="decision-card" class="decision-status-card rejected">
+            <span class="decision-icon" id="decision-icon">🚫</span>
+            <span class="decision-title" id="decision-title">Ruta Rechazada</span>
+            <div class="decision-formula" id="decision-formula">D = F ∧ ¬F = F</div>
+            <p class="decision-message" id="decision-message">Se usará la ruta estándar de menor costo.</p>
+          </div>
+        </div>
+        
+        <!-- Truth Table -->
+        <div class="table-container">
+          <table id="truth-table">
+            <thead>
+              <tr>
+                <th style="width: 15%; text-align: center;">p (Urgente)</th>
+                <th style="width: 25%; text-align: center;">q (Presupuesto Excedido)</th>
+                <th style="width: 15%; text-align: center;">¬q</th>
+                <th style="width: 45%;">D = p ∧ ¬q (Ruta Aprobada)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1: V V F F -->
+              <tr id="row-0">
+                <td style="text-align: center;"><span class="token v">V</span></td>
+                <td style="text-align: center;"><span class="token v">V</span></td>
+                <td style="text-align: center;"><span class="token f">F</span></td>
+                <td><span class="token f">F</span> (Rechazado por costo elevado)</td>
+              </tr>
+              <!-- Row 2: V F V V -->
+              <tr id="row-1">
+                <td style="text-align: center;"><span class="token v">V</span></td>
+                <td style="text-align: center;"><span class="token f">F</span></td>
+                <td style="text-align: center;"><span class="token v">V</span></td>
+                <td><span class="token v">V</span> (Aprobado: se requiere prioridad y hay fondos)</td>
+              </tr>
+              <!-- Row 3: F V F F -->
+              <tr id="row-2">
+                <td style="text-align: center;"><span class="token f">F</span></td>
+                <td style="text-align: center;"><span class="token v">V</span></td>
+                <td style="text-align: center;"><span class="token f">F</span></td>
+                <td><span class="token f">F</span> (Rechazado: no es urgente y supera el costo)</td>
+              </tr>
+              <!-- Row 4: F F V F -->
+              <tr id="row-3">
+                <td style="text-align: center;"><span class="token f">F</span></td>
+                <td style="text-align: center;"><span class="token f">F</span></td>
+                <td style="text-align: center;"><span class="token v">V</span></td>
+                <td><span class="token f">F</span> (Rechazado: no amerita ruta rápida, se usa ruta estándar)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- SECTION 3.5: VALID INFERENCE (MODUS PONENS) -->
+    <section id="inferencia">
+      <h2>Inferencia Lógica Válida (Modus Ponens)</h2>
+      <p class="intro-text">
+        Para validar que la regla de decisión permite <strong>concluir</strong> correctamente la aprobación de una ruta, el sistema aplica la regla de inferencia <strong>Modus Ponens</strong>: si se afirma un condicional y se afirma su antecedente, se concluye necesariamente su consecuente.
+      </p>
+
+      <div class="inference-grid">
+        <div class="premise-card">
+          <div class="premise-label">Premisa 1 (condicional)</div>
+          <div class="premise-formula">(p ∧ ¬q) → D</div>
+          <p class="premise-text">Si el envío es urgente <strong>y</strong> el presupuesto no está excedido, <strong>entonces</strong> se aprueba la ruta rápida directa.</p>
+        </div>
+        <div class="premise-card">
+          <div class="premise-label">Premisa 2 (antecedente)</div>
+          <div class="premise-formula">p ∧ ¬q</div>
+          <p class="premise-text">El lote de cacao es urgente (contrato con penalización por retraso) y su costo logístico no supera el techo presupuestario.</p>
+        </div>
+        <div class="premise-card conclusion-card">
+          <div class="premise-label">∴ Conclusión</div>
+          <div class="premise-formula">D</div>
+          <p class="premise-text">Se aprueba la ruta rápida directa para el envío del cacao.</p>
+        </div>
+      </div>
+
+      <p class="intro-text">
+        La inferencia es <strong>válida</strong> porque su forma lógica <strong>[(A → B) ∧ A] → B</strong> es una <strong>tautología</strong>: en toda fila de su tabla de verdad el resultado es V, por lo que la conclusión nunca puede ser falsa si las premisas son verdaderas.
+      </p>
+    </section>
+
+    <!-- SECTION 4: CONVERSIONS AND MAGNITUDES -->
+    <section id="magnitudes">
+      <h2>Conversión de Magnitudes y Unidades</h2>
+      <p class="intro-text">
+        El sistema procesa y realiza conversiones automáticas entre el Sistema Internacional (SI) y el Sistema Imperial, además de estimar el porcentaje arancelario aplicado al valor FOB de la mercancía.
+      </p>
+      
+      <div class="magnitudes-grid">
+        <!-- Distancia: km a mi -->
+        <div class="magnitude-card">
+          <div class="magnitude-card-header">
+            <span class="magnitude-icon">🌐</span>
+            <div class="magnitude-card-title">Distancia de Ruta</div>
+          </div>
+          <div class="magnitude-converter">
+            <div class="input-group">
+              <label for="input-km">Entrada (Sistema Internacional):</label>
+              <div class="input-container">
+                <input type="number" id="input-km" value="150" min="0">
+                <span class="input-unit">km</span>
+              </div>
+            </div>
+            <div class="conv-arrow">⬇ Conversión</div>
+            <div class="input-group">
+              <label for="output-mi">Resultado (Sistema Imperial):</label>
+              <div class="input-container">
+                <input type="text" id="output-mi" readonly>
+                <span class="input-unit">mi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Combustible: L a gal -->
+        <div class="magnitude-card">
+          <div class="magnitude-card-header">
+            <span class="magnitude-icon">⚓</span>
+            <div class="magnitude-card-title">Combustible</div>
+          </div>
+          <div class="magnitude-converter">
+            <div class="input-group">
+              <label for="input-litros">Entrada (Sistema Internacional):</label>
+              <div class="input-container">
+                <input type="number" id="input-litros" value="500" min="0">
+                <span class="input-unit">L</span>
+              </div>
+            </div>
+            <div class="conv-arrow">⬇ Conversión</div>
+            <div class="input-group">
+              <label for="output-galones">Resultado (Sistema Imperial):</label>
+              <div class="input-container">
+                <input type="text" id="output-galones" readonly>
+                <span class="input-unit">gal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Peso: kg a lb -->
+        <div class="magnitude-card">
+          <div class="magnitude-card-header">
+            <span class="magnitude-icon">🍫</span>
+            <div class="magnitude-card-title">Peso del Cacao</div>
+          </div>
+          <div class="magnitude-converter">
+            <div class="input-group">
+              <label for="input-kg">Entrada (Sistema Internacional):</label>
+              <div class="input-container">
+                <input type="number" id="input-kg" value="25000" min="0">
+                <span class="input-unit">kg</span>
+              </div>
+            </div>
+            <div class="conv-arrow">⬇ Conversión</div>
+            <div class="input-group">
+              <label for="output-libras">Resultado (Sistema Imperial):</label>
+              <div class="input-container">
+                <input type="text" id="output-libras" readonly>
+                <span class="input-unit">lb</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Finanzas: FOB e impuestos -->
+        <div class="magnitude-card">
+          <div class="magnitude-card-header">
+            <span class="magnitude-icon">💵</span>
+            <div class="magnitude-card-title">Indicadores Financieros</div>
+          </div>
+          <div class="magnitude-converter">
+            <div class="input-group">
+              <label for="input-fob">Valor FOB de Cacao (USD):</label>
+              <div class="input-container">
+                <input type="number" id="input-fob" value="147500" min="0">
+                <span class="input-unit">$</span>
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="tax-percentage">Comisiones y tasas logísticas (a):</label>
+              <div class="input-container">
+                <input type="number" id="tax-percentage" value="2" min="0" max="100" step="0.5">
+                <span class="input-unit">%</span>
+              </div>
+            </div>
+            <div class="fob-tax-result">
+              <span>Comisiones logísticas:</span>
+              <strong id="output-taxes">$0.00</strong>
+            </div>
+            <div class="fob-tax-result tariff-zero">
+              <span>Arancel de importación en la UE:</span>
+              <strong>0% → $0.00</strong>
+            </div>
+            <p class="graph-caption">
+              Son dos cosas distintas: el <strong>arancel</strong> que cobra el país de destino es <strong>0%</strong> para el cacao ecuatoriano gracias al Acuerdo Comercial Multipartes Ecuador–UE, mientras que las <strong>comisiones logísticas</strong> (agente de aduana, documentación, manipuleo portuario) sí se pagan y son las que entran en la ecuación del costo total.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </div><!-- /panel-fase1 -->
+
+    <!-- ============================ PANEL: FASE 2 ============================ -->
+    <div class="tab-panel" id="panel-fase2">
+
+    <!-- ============ FASE 2: MODELO ALGEBRAICO ============ -->
+    <div class="phase-banner">
+      <span class="phase-tag">FASE 2</span>
+      <h2 class="phase-title">Modelo Algebraico con Datos Reales</h2>
+      <p class="phase-sub">Formulación de ecuaciones, sistema 2×2 resuelto y comprobado (Producto 2 — Parte C)</p>
+    </div>
+
+    <!-- SECTION 5: REAL DATA -->
+    <section id="datos-reales">
+      <h2>Datos Reales de la Exportación de Cacao</h2>
+      <p class="intro-text">
+        El modelo se construye con datos reales del mercado cacaotero ecuatoriano (julio 2026) y de la logística marítima internacional:
+      </p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Dato</th>
+              <th style="text-align: center;">Valor real</th>
+              <th>Fuente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Precio internacional del cacao (jul. 2026)</td>
+              <td style="text-align: center;"><strong>≈ $5,900 / tonelada</strong></td>
+              <td>Anecacao / Ecuavisa (10-jul-2026)</td>
+            </tr>
+            <tr>
+              <td>Producción de cacao en Esmeraldas</td>
+              <td style="text-align: center;"><strong>58,965 t</strong> en 90,248 ha</td>
+              <td>Ministerio de Agricultura y Ganadería</td>
+            </tr>
+            <tr>
+              <td>Exportación nacional de cacao (2025)</td>
+              <td style="text-align: center;"><strong>≈ 600,000 t</strong> ($4,668 millones)</td>
+              <td>Banco Central del Ecuador / Anecacao</td>
+            </tr>
+            <tr>
+              <td>Flete marítimo contenedor 40 pies (promedio global)</td>
+              <td style="text-align: center;"><strong>≈ $2,286</strong></td>
+              <td>Drewry World Container Index (2026)</td>
+            </tr>
+            <tr>
+              <td>Seguro de carga internacional</td>
+              <td style="text-align: center;"><strong>0.3% – 1.5%</strong> del valor CIF</td>
+              <td>Logintec / TransNatur</td>
+            </tr>
+            <tr>
+              <td>Distancia marítima Guayaquil → Rotterdam (vía Canal de Panamá)</td>
+              <td style="text-align: center;"><strong>≈ 10,700 km</strong></td>
+              <td>Calculadora SeaRates / sea-distances.org</td>
+            </tr>
+            <tr>
+              <td>Arancel del cacao ecuatoriano en la Unión Europea</td>
+              <td style="text-align: center;"><strong>0%</strong> (Acuerdo Multipartes)</td>
+              <td>Ministerio de Agricultura / EEAS-UE</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="problem-card">
+        <strong>Lote modelado:</strong> un contenedor de 40 pies con <strong>25,000 kg (25 t)</strong> de cacao fino de aroma. Valor FOB = 25 t × $5,900/t = <strong>$147,500</strong>.
+      </div>
+    </section>
+
+    <!-- SECTION 6: 2x2 SYSTEM OF EQUATIONS (PARTE C) -->
+    <section id="sistema-ecuaciones">
+      <h2>Sistema de Ecuaciones 2×2: Transporte y Seguro</h2>
+      <p class="intro-text">
+        Para repartir el presupuesto logístico del lote entre <strong>transporte (T)</strong> y <strong>seguro (S)</strong>, se plantea un sistema 2×2 basado en dos condiciones reales de la operación: el presupuesto conjunto asignado y la proporción de mercado entre flete y seguro.
+      </p>
+      <div class="problem-card">
+        <strong>Nomenclatura:</strong> aquí las incógnitas se llaman <strong>T</strong> y <strong>S</strong> (ambas en dólares) y no x e y, para no confundirlas con la variable <strong>x</strong> de la función de utilidad más abajo, que cuenta <strong>contenedores</strong>. Son magnitudes distintas y por eso llevan nombres distintos.
+      </div>
+
+      <div class="simulator-layout">
+        <!-- System controls -->
+        <div class="control-panel">
+          <div class="simulator-controls">
+            <h3 class="variable-title" style="margin-bottom: 0.5rem;">Parámetros del Sistema</h3>
+            <div class="input-group">
+              <label for="input-presupuesto">Presupuesto logístico conjunto (T + S):</label>
+              <div class="input-container">
+                <input type="number" id="input-presupuesto" value="3500" min="1">
+                <span class="input-unit">$</span>
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="input-factor">El transporte cuesta k veces el seguro (T = k·S):</label>
+              <div class="input-container">
+                <input type="number" id="input-factor" value="4" min="1" step="0.5">
+                <span class="input-unit">k</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="eq-box">
+            <div class="eq-title">Sistema planteado</div>
+            <div class="eq-line" id="eq-1">T + S = 3500</div>
+            <div class="eq-line" id="eq-2">T = 4S</div>
+          </div>
+
+          <div class="solution-card">
+            <div class="eq-title">Resolución por sustitución</div>
+            <ol class="steps-list" id="solution-steps">
+              <li>Sustituir T = 4S en la 1ª ecuación: 4S + S = 3500</li>
+              <li>5S = 3500 → S = 700</li>
+              <li>T = 4(700) = 2800</li>
+            </ol>
+            <div class="solution-result" id="solution-result">
+              T = $2,800.00 (transporte) &nbsp;•&nbsp; S = $700.00 (seguro)
+            </div>
+            <div class="verification" id="verification">
+              ✔ Comprobación: 2800 + 700 = 3500 ✓ &nbsp;|&nbsp; 2800 = 4 × 700 ✓
+            </div>
+          </div>
+        </div>
+
+        <!-- Graph of the system -->
+        <div class="graph-panel">
+          <div class="eq-title">Evidencia gráfica: intersección de las dos rectas</div>
+          <svg id="system-graph" viewBox="0 0 520 340" role="img" aria-label="Gráfica del sistema de ecuaciones"></svg>
+          <p class="graph-caption" id="graph-caption">
+            La solución del sistema es el punto donde se cruzan ambas rectas: (S, T) = (700, 2800).
+          </p>
+        </div>
+      </div>
+
+      <div class="problem-card decision-line" id="decision-interpretation">
+        <strong>Decisión técnica (una línea):</strong> como el costo logístico total ($3,500) no excede el techo presupuestario del lote, ¬q es verdadera; si además el envío es urgente (p), por Modus Ponens se concluye D: se aprueba la ruta rápida directa.
+      </div>
+    </section>
+
+    <!-- SECTION 7: TOTAL COST EQUATION -->
+    <section id="costo-total">
+      <h2>Ecuación del Costo Logístico Total</h2>
+      <p class="intro-text">
+        El costo logístico total del envío (C) se modela sumando el transporte, el seguro y las comisiones logísticas aplicadas como porcentaje del valor FOB:
+      </p>
+      <div class="eq-box eq-central">
+        <div class="eq-line">C = T + S + (a/100) · FOB</div>
+      </div>
+      <div class="magnitudes-grid">
+        <div class="magnitude-card">
+          <div class="magnitude-card-header">
+            <span class="magnitude-icon">🧮</span>
+            <div class="magnitude-card-title">Cálculo con el lote real</div>
+          </div>
+          <div class="magnitude-converter">
+            <div class="input-group">
+              <label for="input-comision">Comisión logística (a):</label>
+              <div class="input-container">
+                <input type="number" id="input-comision" value="2" min="0" max="100" step="0.5">
+                <span class="input-unit">%</span>
+              </div>
+            </div>
+            <div class="fob-tax-result">
+              <span>Costo total C:</span>
+              <strong id="output-costo-total">$0.00</strong>
+            </div>
+            <p class="graph-caption" id="costo-detalle"></p>
+          </div>
+        </div>
+        <div class="magnitude-card">
+          <div class="magnitude-card-header">
+            <span class="magnitude-icon">📏</span>
+            <div class="magnitude-card-title">Conversiones del lote (SI → Imperial)</div>
+          </div>
+          <div class="magnitude-converter">
+            <p class="premise-text">• Distancia: 10,700 km × 0.621371 = <strong>6,648.67 mi</strong></p>
+            <p class="premise-text">• Peso: 25,000 kg × 2.20462 = <strong>55,115.50 lb</strong></p>
+            <p class="premise-text">• Combustible terrestre (Esmeraldas → Guayaquil, 470 km a 40 L/100 km): 188 L × 0.264172 = <strong>49.66 gal</strong></p>
+            <p class="premise-text">• Seguro como porcentaje del FOB: 700 / 147,500 = <strong>0.47%</strong> (dentro del rango real 0.3%–1.5%)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </div><!-- /panel-fase2 -->
+
+    <!-- ============================ PANEL: FASE 3 ============================ -->
+    <div class="tab-panel" id="panel-fase3">
+
+    <!-- ============ ANALISIS DE FUNCIONES (Clase 9.1 - Avance Producto 2/3) ============ -->
+    <div class="phase-banner">
+      <span class="phase-tag">AVANCE PRODUCTO 2/3</span>
+      <h2 class="phase-title">Análisis de Funciones: ¿Cuántos Contenedores Exportar?</h2>
+      <p class="phase-sub">Clase 9.1 — Dominio real, monotonía y punto óptimo (vértice) del modelo del proyecto</p>
+    </div>
+
+    <section id="funcion-optimo">
+      <h2>Función de Utilidad Mensual U(x)</h2>
+      <p class="intro-text">
+        Las fases anteriores resolvieron <strong>cuándo</strong> usar la ruta rápida (lógica) y <strong>cómo</strong> repartir el presupuesto logístico (sistema 2×2). Esta función responde la decisión que la asociación toma cada mes: <strong>cuántos contenedores de 25 t exportar</strong>.
+      </p>
+
+      <h3 class="sub-heading">Paso 1: el supuesto de modelado que genera la curva</h3>
+      <div class="assumption-card">
+        <div class="assumption-tag">Supuesto declarado</div>
+        <p>
+          Para exportar más volumen, la asociación no puede comprarle solo a los productores más cercanos: debe acopiar cacao de fincas y asociaciones cada vez más lejanas, y pagar una prima creciente para asegurar el grano. Modelamos ese encarecimiento como una <strong>función lineal del precio de compra por tonelada</strong>:
+        </p>
+        <div class="eq-line" style="text-align:center; margin: 0.75rem 0;">P(x) = 4,700 + 100x &nbsp; (USD por tonelada)</div>
+        <p>
+          Es decir: el precio base es <strong>$4,700/t</strong> (precio en finca en Esmeraldas, aproximadamente el 80% del valor FOB) y sube <strong>$100 por tonelada</strong> por cada contenedor adicional que se quiera llenar en el mes.
+        </p>
+        <p class="assumption-warning">
+          <strong>Limitación del modelo:</strong> el incremento de $100/t por contenedor es una <strong>estimación propia</strong>, no un dato publicado. Representa los rendimientos decrecientes del acopio: llenar más contenedores obliga a comprar en fincas cada vez más lejanas. Por eso más abajo se incluye un análisis de sensibilidad.
+        </p>
+      </div>
+
+      <h3 class="sub-heading">Validación del precio base contra datos reales</h3>
+      <p class="intro-text">
+        El precio base de $4,700/t asume que el productor recibe cerca del <strong>80% del precio de exportación</strong>. Esa proporción se contrastó con lo que realmente se pagó en Ecuador durante 2026:
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Momento</th>
+              <th style="text-align: center;">Precio internacional</th>
+              <th style="text-align: center;">Pagado al productor</th>
+              <th style="text-align: center;">Proporción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Enero 2026</td>
+              <td style="text-align: center;">$4,500 / t</td>
+              <td style="text-align: center;">$185 / qq = $4,078 / t</td>
+              <td style="text-align: center;">90.6%</td>
+            </tr>
+            <tr>
+              <td>Mayo 2026</td>
+              <td style="text-align: center;">$4,169 / t</td>
+              <td style="text-align: center;">$151.70 / qq = $3,344 / t</td>
+              <td style="text-align: center;">80.2%</td>
+            </tr>
+            <tr class="active-row">
+              <td><strong>Supuesto de este modelo</strong></td>
+              <td style="text-align: center;"><strong>$5,900 / t</strong></td>
+              <td style="text-align: center;"><strong>$4,700 / t</strong></td>
+              <td style="text-align: center;"><strong>79.7%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="problem-card">
+        <strong>Qué confirma la comparación:</strong> el 79.7% que usa el modelo coincide con el 80.2% observado en mayo de 2026 y queda en el extremo conservador del rango registrado durante el año. Además, la brecha entre ambos precios tiene una explicación documentada: los compradores internacionales aplican un <strong>diferencial de hasta $700 por tonelada</strong> al cacao ecuatoriano y la exportación suma entre $12 y $15 por quintal en gastos. El precio base no es una cifra arbitraria, sino el resultado de una cadena de descuentos real.
+        <br><br>
+        <em>Fuentes: Expreso (mayo 2026, precio al agricultor y diferencial) · Extra (enero 2026, cotización internacional).</em>
+      </div>
+
+      <h3 class="sub-heading">Paso 2: derivación de la función</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Componente</th>
+              <th style="text-align: center;">Cálculo</th>
+              <th style="text-align: center;">Aporte a U(x)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ingreso por venta (x contenedores × 25 t × $5,900/t)</td>
+              <td style="text-align: center;">147,500 · x</td>
+              <td style="text-align: center;"><strong>+147,500x</strong></td>
+            </tr>
+            <tr>
+              <td>Costo de compra del cacao (x contenedores × 25 t × P(x))</td>
+              <td style="text-align: center;">x · 25 · (4,700 + 100x)</td>
+              <td style="text-align: center;"><strong>−117,500x − 2,500x²</strong></td>
+            </tr>
+            <tr>
+              <td>Costo logístico (resultado de la Fase 2: T + S + comisiones)</td>
+              <td style="text-align: center;">6,450 · x</td>
+              <td style="text-align: center;"><strong>−6,450x</strong></td>
+            </tr>
+            <tr>
+              <td>Costos fijos mensuales (administración, certificación orgánica)</td>
+              <td style="text-align: center;">20,000</td>
+              <td style="text-align: center;"><strong>−20,000</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="derivation-box">
+        <div class="eq-title">De dónde sale exactamente el término cuadrático</div>
+        <p class="premise-text">
+          Al multiplicar el número de contenedores por un precio que a su vez depende del número de contenedores, aparece el cuadrado de forma natural:
+        </p>
+        <div class="deriv-line">Costo de compra = x · 25 · (4,700 + 100x) = <strong>117,500x + 2,500x²</strong></div>
+        <div class="deriv-line highlight">El coeficiente −2,500 = 25 t/contenedor × $100/t = <strong>$2,500</strong>, con unidades de dólares por contenedor al cuadrado.</div>
+        <p class="premise-text">
+          Agrupando el término lineal: 147,500 − 117,500 − 6,450 = <strong>23,550</strong> dólares de margen por contenedor.
+        </p>
+      </div>
+
+      <div class="eq-box eq-central">
+        <div class="eq-line">U(x) = −2,500x² + 23,550x − 20,000</div>
+      </div>
+
+      <div class="simulator-layout">
+        <div class="control-panel">
+          <div class="solution-card">
+            <div class="eq-title">Análisis de la función</div>
+            <ol class="steps-list">
+              <li><strong>Concavidad:</strong> a = −2,500 &lt; 0 → abre hacia abajo → el vértice es un <strong>máximo</strong>.</li>
+              <li><strong>Vértice:</strong> x<sub>v</sub> = −b/2a = 23,550 / 5,000 = <strong>4.71</strong>; U(4.71) = <strong>$35,460.25</strong>.</li>
+              <li><strong>Raíces</strong> (equilibrio, U = 0) por fórmula general: x ≈ <strong>0.94</strong> y x ≈ <strong>8.48</strong>.</li>
+              <li><strong>Crece</strong> en (0 ; 4.71) &nbsp;•&nbsp; <strong>Decrece</strong> en (4.71 ; ∞).</li>
+            </ol>
+            <div class="solution-result">
+              Dominio real: x ∈ {1, 2, …, 8} contenedores enteros
+            </div>
+            <div class="verification">
+              ✔ Óptimo real: <strong>5 contenedores → $35,250 al mes</strong> (U(4) = $34,200 &lt; U(5) = $35,250)
+            </div>
+          </div>
+
+          <div class="simulator-controls">
+            <h3 class="variable-title" style="margin-bottom: 0.5rem;">Evalúa la función</h3>
+            <div class="control-group">
+              <div class="control-label">
+                <span class="control-title">Contenedores (x)</span>
+                <span class="control-sub">Mueve para ver la utilidad</span>
+              </div>
+              <span class="x-value" id="x-value">5</span>
+            </div>
+            <input type="range" id="input-contenedores" min="0" max="9" step="1" value="5" class="range-slider">
+            <div class="fob-tax-result">
+              <span>Utilidad U(x):</span>
+              <strong id="output-utilidad">$35,250.00</strong>
+            </div>
+            <p class="graph-caption" id="utilidad-detalle"></p>
+          </div>
+        </div>
+
+        <div class="graph-panel">
+          <div class="eq-title">Gráfica de la parábola: raíces, vértice y dominio real</div>
+          <svg id="utility-graph" viewBox="0 0 560 380" role="img" aria-label="Gráfica de la función de utilidad"></svg>
+          <p class="graph-caption">
+            Los cuadrados azules son el <strong>dominio con sentido real</strong> (contenedores enteros). El punto naranja marca el óptimo aplicable: <strong>5 contenedores</strong>, el entero más cercano al vértice teórico.
+          </p>
+        </div>
+      </div>
+
+      <h3 class="sub-heading">Análisis de sensibilidad: ¿y si el supuesto fuera otro?</h3>
+      <p class="intro-text">
+        Como el incremento de $100/t es una estimación propia, comprobamos qué pasa con la recomendación si ese valor cambia. Llamando <strong>m</strong> al incremento del precio por tonelada por cada contenedor adicional, el término cuadrático es <strong>25m</strong> y el vértice se ubica en <strong>x<sub>v</sub> = 23,550 / (50m) = 471/m</strong>:
+      </p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align: center;">m (USD/t por contenedor)</th>
+              <th style="text-align: center;">Función U(x)</th>
+              <th style="text-align: center;">Vértice x<sub>v</sub></th>
+              <th style="text-align: center;">Óptimo entero</th>
+              <th style="text-align: center;">Utilidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align: center;">$50 (acopio fácil)</td>
+              <td style="text-align: center;">−1,250x² + 23,550x − 20,000</td>
+              <td style="text-align: center;">9.42</td>
+              <td style="text-align: center;"><strong>9 contenedores</strong></td>
+              <td style="text-align: center;">$90,700</td>
+            </tr>
+            <tr class="active-row">
+              <td style="text-align: center;"><strong>$100 (caso base)</strong></td>
+              <td style="text-align: center;">−2,500x² + 23,550x − 20,000</td>
+              <td style="text-align: center;">4.71</td>
+              <td style="text-align: center;"><strong>5 contenedores</strong></td>
+              <td style="text-align: center;">$35,250</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">$150 (acopio difícil)</td>
+              <td style="text-align: center;">−3,750x² + 23,550x − 20,000</td>
+              <td style="text-align: center;">3.14</td>
+              <td style="text-align: center;"><strong>3 contenedores</strong></td>
+              <td style="text-align: center;">$16,900</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">$200 (escasez de grano)</td>
+              <td style="text-align: center;">−5,000x² + 23,550x − 20,000</td>
+              <td style="text-align: center;">2.35</td>
+              <td style="text-align: center;"><strong>2 contenedores</strong></td>
+              <td style="text-align: center;">$7,100</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="problem-card">
+        <strong>Qué nos dice la sensibilidad:</strong> la <strong>estructura</strong> de la conclusión es robusta — en los cuatro escenarios existe un número óptimo de contenedores y exportar de más siempre reduce la utilidad. Lo que sí cambia es la <strong>magnitud</strong>: mientras más caro sea acopiar el cacao, menos contenedores conviene mover. Por eso la recomendación de 5 contenedores es válida bajo el supuesto de $100/t, y la asociación debería medir ese valor real en campo antes de comprometer volúmenes mayores.
+      </div>
+
+      <div class="problem-card decision-line">
+        <strong>Interpretación técnica:</strong> la asociación debe exportar <strong>5 contenedores al mes (125 t)</strong> para maximizar la utilidad en <strong>$35,250</strong>. Con menos de 1 contenedor no se cubren los costos fijos y con más de 8 el encarecimiento del acopio consume el margen. Cada uno de esos 5 envíos se despacha con el presupuesto repartido según el sistema 2×2 de la Fase 2 (T = $2,800 de transporte y S = $700 de seguro) y se decide su ruta con la regla lógica D = p ∧ ¬q de la Fase 1.
+      </div>
+    </section>
+
+    </div><!-- /panel-fase3 -->
+
+    </main><!-- /tab-container -->
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2026-1 Pontificia Universidad Católica del Ecuador - Sede Esmeraldas.</p>
+      <p>Desarrollado para el Proyecto Integrador de Habilidades Lógico-Matemáticas.</p>
+    </footer>
+
+  </div>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a class="wa-fab" id="wa-fab" href="#" target="_blank" rel="noopener noreferrer">
+    <svg class="wa-glifo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20Zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3c-.2.3-.9.9-.9 2.1s.9 2.5 1 2.6a9.3 9.3 0 0 0 3.6 3.2c1.3.6 1.9.6 2.5.5.4 0 1.4-.5 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3Z"/>
+    </svg>
+    <span class="wa-fab-txt">Escríbenos</span>
+  </a>
+
+  <script src="script.js?v=9"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# Dependencias de Node (se reinstalan con: npm install)
+node_modules/
+
+# Archivos temporales de Office
+~$*
+*.tmp
+
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
